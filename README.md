@@ -19,7 +19,8 @@
 
 #### No.7　再生回数を取得  ーcount(*)とgroup byの併用ー
 * ID指定がない場合：
- * `select music_id, count(*) as times from play_history group by music_id limit 100`
+ * まずmusicテーブルから最新の100件を取り出してきてから…それをwhere-in条件で使う。具体的には下記。
+ * `select music_id, count(*) as times from play_history where music_id IN ? group by music_id`
 
 * ID指定がある場合：
  * `select music_id, count(*) as times from play_history where music_id = ? group by music_id (limit 100)`
